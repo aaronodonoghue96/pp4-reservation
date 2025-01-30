@@ -1,0 +1,5 @@
+<form action="{% url 'reservation_detail' reservation.id %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="_method" value="DELETE">
+    <button type="submit">Delete Reservation</button>
+</form>

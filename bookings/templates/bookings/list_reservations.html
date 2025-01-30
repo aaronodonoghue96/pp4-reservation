@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reservations List</title>
+</head>
+<body>
+    <!-- list_reservations.html -->
+  <h2>Reservations</h2>
+  <table>
+  <thead>
+    <tr>
+      <th>Customer Name</th>
+      <th>Number of People</th>
+      <th>Time</th>
+      <th>Phone Number</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for reservation in reservations %}
+      <tr>
+        <td>{{ reservation.customer_name }}</td>
+        <td>{{ reservation.number_of_people }}</td>
+        <td>{{ reservation.reservation_time }}</td>
+        <td>{{ reservation.phone_number }}</td>
+        <td>
+          <a href="{% url 'update_reservation' reservation.pk %}">Edit</a>
+          <a href="{% url 'delete_reservation' reservation.pk %}">Delete</a>
+        </td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td colspan="6">No reservations found.</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+  </table>
+
+  <a href="{% url 'create_reservation' %}">Create New Reservation</a>
+</body>
+</html>
