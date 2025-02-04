@@ -24,5 +24,4 @@ urlpatterns = [
     path('create/', views.create_reservation, name='create_reservation'),
     path('update/<int:pk>/', views.update_reservation, name='update_reservation'),
     path('delete/<int:pk>/', views.delete_reservation, name='delete_reservation'),
-    path('admin/', admin.site.urls),
 ]
