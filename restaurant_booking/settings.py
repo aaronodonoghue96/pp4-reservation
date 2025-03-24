@@ -27,7 +27,7 @@ STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 SECRET_KEY = 'django-insecure-36q+ol+nz%77jih(+e9p9(iso!-p&+htij8e$0d!7dzl*7whpi'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["pp4-reservation-797e3a069ab7.herokuapp.com", "localhost", "127.0.0.1"]
 
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bookings',
+    'restaurant_booking',
 ]
 
 MIDDLEWARE = [
