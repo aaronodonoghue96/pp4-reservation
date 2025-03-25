@@ -26,8 +26,8 @@
                 <td>{{ reservation.reservation_time }}</td>
                 <td>{{ reservation.phone_number }}</td>
                 <td>
-                    <a href="{% url 'update_reservation' reservation.pk %}">Edit</a>
-                    <a href="{% url 'delete_reservation' reservation.pk %}">Delete</a>
+                    <a href="{% url 'update_reservation' reservation.pk %}" class="btn">Edit</a>
+                    <a href="{% url 'delete_reservation' reservation.pk %}" class="btn">Delete</a>
                 </td>
             </tr>
             {% empty %}
@@ -46,7 +46,7 @@
     });
     </script>
     {% endif %}
-    <a href="{% url 'create_reservation' %}">Create New Reservation</a>
+    <a href="{% url 'create_reservation' %}" class="btn">Create New Reservation</a>
     {% if user.is_authenticated %}
     <form method="POST" action="{% url 'logout' %}">
         {% csrf_token %}

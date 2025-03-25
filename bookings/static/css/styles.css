@@ -82,6 +82,18 @@ a {
     gap: 10px;
 }
 
+.btn {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    margin: 5px;
+}
+
 /* Make the table responsive */
 @media (max-width: 768px) {
     .container {
