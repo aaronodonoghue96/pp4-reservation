@@ -2,7 +2,9 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
 from django.contrib.auth import login
 from .models import Reservation
@@ -33,6 +35,12 @@ def list_reservations(request):
 @login_required
 def update_reservation(request, pk):
     reservation = get_object_or_404(Reservation, pk=pk)
+
+    # Allow only the owner or an admin
+    if request.user != reservation.user and not request.user.is_superuser:
+        messages.error(request, "You do not have permission to edit this reservation.")
+        return redirect("list_reservations")  # Redirect to the reservations list
+
     if request.method == 'POST':
         form = ReservationForm(request.POST, instance=reservation)
         if form.is_valid():
@@ -46,6 +54,12 @@ def update_reservation(request, pk):
 @login_required
 def delete_reservation(request, pk):
     reservation = get_object_or_404(Reservation, pk=pk)
+
+    # Allow only the owner or an admin
+    if request.user != reservation.user and not request.user.is_superuser:
+        messages.error(request, "You do not have permission to edit this reservation.")
+        return redirect("list_reservations")  # Redirect to the reservations list
+
     reservation.delete()
     return redirect('list_reservations')
 
