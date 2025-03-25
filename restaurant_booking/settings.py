@@ -78,7 +78,7 @@ TEMPLATES = [
 
 # Redirect URLs after login/logout
 LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/login/'  # Redirect here after logout
+LOGOUT_REDIRECT_URL = '/'  # Redirect here after logout
 
 WSGI_APPLICATION = 'restaurant_booking.wsgi.application'
 
