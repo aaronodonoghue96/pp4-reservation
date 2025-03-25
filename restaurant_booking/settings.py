@@ -10,8 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
-import dj_database_url
-
 from pathlib import Path
 import os
 
@@ -29,14 +27,17 @@ STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 SECRET_KEY = 'django-insecure-36q+ol+nz%77jih(+e9p9(iso!-p&+htij8e$0d!7dzl*7whpi'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["pp4-reservation-797e3a069ab7.herokuapp.com", "localhost", "127.0.0.1"]
+
+LOGIN_URL = '/login/' 
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'django_extensions',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -75,15 +76,27 @@ TEMPLATES = [
     },
 ]
 
+# Redirect URLs after login/logout
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/login/'  # Redirect here after logout
+
 WSGI_APPLICATION = 'restaurant_booking.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': dj_database_url.config(default='sqlite:///db.sqlite3')
-}
+if 'DATABASE_URL' in os.environ:
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation
