@@ -7,15 +7,15 @@
 </head>
 <body>
     {% if user.is_authenticated %}
-    <form method="POST" action="{% url 'logout' %}">
-        {% csrf_token %}
-        <button type="submit">Logout</button>
-    </form>
     <h1>Create Reservation</h1>
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Submit</button>
+    </form>
+    <form method="POST" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
     </form>
     {% else %}
     <a href="{% url 'login' %}">Login</a>

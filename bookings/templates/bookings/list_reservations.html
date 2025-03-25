@@ -7,15 +7,6 @@
 </head>
 <body>
     <!-- list_reservations.html -->
-    {% if user.is_authenticated %}
-    <form method="POST" action="{% url 'logout' %}">
-        {% csrf_token %}
-        <button type="submit">Logout</button>
-    </form>
-    {% else %}
-    <a href="{% url 'login' %}">Login</a>
-    <a href="{% url 'register' %}">Register</a>
-    {% endif %}
     <h2>Reservations</h2>
     <table>
         <thead>
@@ -54,6 +45,15 @@
         {% endfor %}
     });
     </script>
+    {% endif %}
+    {% if user.is_authenticated %}
+    <form method="POST" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+    {% else %}
+    <a href="{% url 'login' %}">Login</a>
+    <a href="{% url 'register' %}">Register</a>
     {% endif %}
     <a href="{% url 'create_reservation' %}">Create New Reservation</a>
 </body>

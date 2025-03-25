@@ -25,9 +25,10 @@ h1, h2 {
 form {
     margin: 20px 0;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column; /* Makes the form elements stack vertically */
     gap: 10px;
-    justify-content: space-between;
+    width: 100%;
+    max-width: 400px; /* Limit form width */
 }
 
     form input, form button {
