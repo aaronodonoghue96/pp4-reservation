@@ -35,7 +35,7 @@ STATICFILES_STORAGE = storage
 SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["pp4-reservation-797e3a069ab7.herokuapp.com", "localhost", 
                  "127.0.0.1"]
