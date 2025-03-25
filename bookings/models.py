@@ -13,5 +13,5 @@ class Reservation(models.Model):
     # deleted if the associated user is deleted.
 
     def __str__(self):
-        return f"Reservation for {self.customer_name} at 
-        {self.reservation_time}"
+        return f"Reservation for {self.customer_name}" + \
+                f"at {self.reservation_time}"
