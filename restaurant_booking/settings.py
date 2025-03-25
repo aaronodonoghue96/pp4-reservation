@@ -14,20 +14,22 @@ from pathlib import Path
 import os
 import dj_database_url
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Base directory for the project
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
+STATIC_URL = '/static/'
 
-STATIC_URL = 'static/'
+# The directory where static files will be collected in production
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# This line tells Django to look for static files in the 'static' folder in the project root.
+# Additional locations for static files during development (bookings app's static directory)
+STATICFILES_DIRS = [
+    BASE_DIR / 'bookings' / 'static',
+]
+
+# WhiteNoise for serving static files in production
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 
 SECRET_KEY = os.environ["SECRET_KEY"]
 
