@@ -30,7 +30,8 @@ def create_reservation(request):
 # List all reservations
 def list_reservations(request):
     reservations = Reservation.objects.all()
-    return render(request, 'bookings/list_reservations.html', {'reservations': reservations})
+    return render(request, 'bookings/list_reservations.html', 
+                  {'reservations': reservations})
 
 # Update a reservation
 @login_required
@@ -39,8 +40,10 @@ def update_reservation(request, pk):
 
     # Allow only the owner or an admin
     if request.user != reservation.user and not request.user.is_superuser:
-        messages.error(request, "You do not have permission to edit this reservation.")
-        return redirect("list_reservations")  # Redirect to the reservations list
+        messages.error(request, 
+                       "You do not have permission to edit this reservation.")
+        return redirect("list_reservations")  
+        # Redirect to the reservations list
 
     if request.method == 'POST':
         form = ReservationForm(request.POST, instance=reservation)
@@ -59,8 +62,10 @@ def delete_reservation(request, pk):
 
     # Allow only the owner or an admin
     if request.user != reservation.user and not request.user.is_superuser:
-        messages.error(request, "You do not have permission to edit this reservation.")
-        return redirect("list_reservations")  # Redirect to the reservations list
+        messages.error(request, 
+                       "You do not have permission to edit this reservation.")
+        return redirect("list_reservations")  
+        # Redirect to the reservations list
 
     reservation.delete()
     messages.info(request, "Successfully deleted reservation!")
@@ -74,7 +79,8 @@ def register(request):
             user = form.save()
             # Log the user in automatically
             login(request, user)
-            return redirect('list_reservations')  # Redirect to the list reservations page
+            return redirect('list_reservations')  
+            # Redirect to the list reservations page
     else:
         form = UserCreationForm()
     return render(request, 'registration/register.html', {'form': form})

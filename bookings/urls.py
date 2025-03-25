@@ -30,6 +30,8 @@ urlpatterns = [
 
     path('', views.list_reservations, name='list_reservations'),
     path('create/', views.create_reservation, name='create_reservation'),
-    path('update/<int:pk>/', views.update_reservation, name='update_reservation'),
-    path('delete/<int:pk>/', views.delete_reservation, name='delete_reservation'),
+    path('update/<int:pk>/', views.update_reservation, 
+         name='update_reservation'),
+    path('delete/<int:pk>/', views.delete_reservation, 
+         name='delete_reservation'),
 ]

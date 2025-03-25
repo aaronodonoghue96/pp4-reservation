@@ -8,13 +8,15 @@ from datetime import datetime
 class ReservationForm(forms.ModelForm):
     class Meta:
         model = Reservation
-        fields = ['customer_name', 'number_of_people', 'reservation_time', 'phone_number']
+        fields = ['customer_name', 'number_of_people', 
+                  'reservation_time', 'phone_number']
 
     # Validate number_of_people > 0
     def clean_number_of_people(self):
         number = self.cleaned_data.get('number_of_people')
         if number <= 0:
-            raise forms.ValidationError('Number of people must be greater than zero.')
+            raise forms.ValidationError(
+                'Number of people must be greater than zero.')
         return number
 
     def clean_reservation_time(self):
@@ -23,7 +25,8 @@ class ReservationForm(forms.ModelForm):
         if reservation_time.tzinfo is None:
             reservation_time = timezone.make_aware(reservation_time)
         if reservation_time < timezone.make_aware(datetime.now()):
-            raise forms.ValidationError("The selected date cannot be in the past.")
+            raise forms.ValidationError(
+                "The selected date cannot be in the past.")
         return reservation_time
 
     def clean_phone_number(self):
@@ -40,7 +43,8 @@ class ReservationForm(forms.ModelForm):
         phone_number = cleaned_data.get('phone_number')
 
         if reservation_time and phone_number:
-            qs = Reservation.objects.filter(reservation_time=reservation_time, phone_number=phone_number)
+            qs = Reservation.objects.filter(reservation_time=reservation_time,
+                                           phone_number=phone_number)
 
             # Exclude self in update case
             if self.instance.pk:
