@@ -32,3 +32,5 @@ Result: Change was not made, user is alerted that they don't have permission to 
 
 Manually tested deleting and updating a record not made by user, as an admin:
 Result: Change was made, as admin has permission to change or delete any record
+
+Tested responsiveness using Google browser and manually resizing window, all elements are visible in all cases, works across all screen sizes
