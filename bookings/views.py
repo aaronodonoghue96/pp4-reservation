@@ -24,6 +24,7 @@ def create_reservation(request):
             return redirect('list_reservations')
     else:
         form = ReservationForm()
+    messages.info(request, "Successfully created reservation!")
     return render(request, 'bookings/create_reservation.html', {'form': form})
 
 # List all reservations
@@ -48,6 +49,7 @@ def update_reservation(request, pk):
             return redirect('list_reservations')
     else:
         form = ReservationForm(instance=reservation)
+    messages.info(request, "Successfully updated reservation!")
     return render(request, 'bookings/update_reservation.html', {'form': form})
 
 # Delete a reservation
@@ -61,6 +63,7 @@ def delete_reservation(request, pk):
         return redirect("list_reservations")  # Redirect to the reservations list
 
     reservation.delete()
+    messages.info(request, "Successfully deleted reservation!")
     return redirect('list_reservations')
 
 def register(request):
