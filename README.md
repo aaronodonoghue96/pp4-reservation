@@ -4,12 +4,41 @@
 
 ## Overview
 
+![Homepage](pp4_reservation_homepage.png)
+
 This is a simple restaurant booking website made using Python, HTML and PostgreSQL for Portfolio Project 4 of the Code Institute Full Stack Development course.
 
 The deployed app is on https://pp4-reservation-797e3a069ab7.herokuapp.com/.
 
 ER diagram generated using python manage.py graph_models -a -g -o er_diagram.png from django-extensions and Graphviz
 ![ER diagram](er_diagram.png)
+
+## Features
+
+# Create
+Users can create a new booking, but only if logged in
+
+# Read
+Users can view all bookings whether logged in or not
+
+# Update
+Users can update a booking, but only one they made themself. If they attempt to update a booking that is not in their name, they will be notified that they can't do this via a JavaScript alert.
+
+# Delete
+Users can delete a booking, but only one they made themself. If they attempt to dleete a booking that is not in their name, they will be notified that they can't do this via a JavaScript alert.
+
+# Login
+Users can log in if they have an account, which allows them create, update and delete bookings
+
+# Logout
+Users can log out at any time
+
+# Register
+Users can register if they don't already have an account
+
+# Future Features
+Currently, there are no table numbers, so in the future, I plan to add table numbers to the model and prevent double bookings for tables (i.e. same table, same date/time).
+I also plan to have non-admmin users only able to view their own bookings while admin users can still view all bookings.
 
 ## Technologies Used
 
