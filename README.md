@@ -16,24 +16,35 @@ ER diagram generated using python manage.py graph_models -a -g -o er_diagram.png
 ## Features
 
 # Create
+![Create reservation](create_reservation.png)
+![Create button](create_button.png)
 Users can create a new booking, but only if logged in
 
 # Read
+![View reservation](view_reservation.png)
 Users can view all bookings whether logged in or not
 
 # Update
+![Update reservation](update_reservation.png)
+![Update button](update_button.png)
 Users can update a booking, but only one they made themself. If they attempt to update a booking that is not in their name, they will be notified that they can't do this via a JavaScript alert.
 
 # Delete
+![Delete button](delete_button.png)
 Users can delete a booking, but only one they made themself. If they attempt to dleete a booking that is not in their name, they will be notified that they can't do this via a JavaScript alert.
 
 # Login
+![Login](login.png)
+![Login button](login_button.png)
 Users can log in if they have an account, which allows them create, update and delete bookings
 
 # Logout
+![Logout button](logout_button.png)
 Users can log out at any time
 
 # Register
+![Register](register.png)
+![Register button](register_button.png)
 Users can register if they don't already have an account
 
 # Future Features
