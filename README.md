@@ -1,5 +1,16 @@
 # PP4 - Reservation
 
+# PP4 Reservation
+
+## Overview
+
+This is a simple restaurant booking website made using Python, HTML and PostgreSQL for Portfolio Project 4 of the Code Institute Full Stack Development course.
+
+The deployed app is on https://pp4-reservation-797e3a069ab7.herokuapp.com/.
+
+ER diagram generated using python manage.py graph_models -a -g -o er_diagram.png from django-extensions and Graphviz
+![ER diagram](er_diagram.png)
+
 ## Technologies Used
 
 ### Languages Used
