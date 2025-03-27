@@ -75,6 +75,10 @@ Python:
 Validated using PEP8, no errors found
 https://pep8ci.herokuapp.com/
 
+Lighthouse:
+![Lighthouse scores](screenshots/lighthouse.png)
+Scores 100 on accessibility and performance on Lighthouse
+
 
 ## Testing
 
