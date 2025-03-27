@@ -11,39 +11,47 @@ This is a simple restaurant booking website made using Python, HTML and PostgreS
 The deployed app is on https://pp4-reservation-797e3a069ab7.herokuapp.com/.
 
 ER diagram generated using python manage.py graph_models -a -g -o er_diagram.png from django-extensions and Graphviz
+
 ![ER diagram](screenshots/er_diagram.png)
 
 ## Features
 
 # Create
 Users can create a new booking, but only if logged in
+
 ![Create reservation](screenshots/create_reservation.png)
 ![Create button](screenshots/create_button.png)
 
 # Read
 Users can view all bookings whether logged in or not
+
 ![View reservation](screenshots/view_reservations.png)
 
 # Update
+Users can update a booking, but only one they made themself. If they attempt to update a booking that is not in their name, they will be notified that they can't do this via a JavaScript alert.
+
 ![Update reservation](screenshots/update_reservation.png)
 ![Update button](screenshots/edit_button.png)
-Users can update a booking, but only one they made themself. If they attempt to update a booking that is not in their name, they will be notified that they can't do this via a JavaScript alert.
 
 # Delete
 Users can delete a booking, but only one they made themself. If they attempt to dleete a booking that is not in their name, they will be notified that they can't do this via a JavaScript alert.
+
 ![Delete button](screenshots/delete_button.png)
 
 # Login
 Users can log in if they have an account, which allows them create, update and delete bookings
+
 ![Login](screenshots/login.png)
 ![Login button](screenshots/login_button.png)
 
 # Logout
 Users can log out at any time
+
 ![Logout button](screenshots/logout_button.png)
 
 # Register
 Users can register if they don't already have an account
+
 ![Register](screenshots/register.png)
 ![Register button](screenshots/register_button.png)
 
@@ -77,6 +85,7 @@ https://pep8ci.herokuapp.com/
 
 Lighthouse:
 Scores 100 on accessibility and performance on Lighthouse
+
 ![Lighthouse scores](screenshots/lighthouse.png)
 
 
