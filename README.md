@@ -16,36 +16,36 @@ ER diagram generated using python manage.py graph_models -a -g -o er_diagram.png
 ## Features
 
 # Create
+Users can create a new booking, but only if logged in
 ![Create reservation](screenshots/create_reservation.png)
 ![Create button](screenshots/create_button.png)
-Users can create a new booking, but only if logged in
 
 # Read
-![View reservation](screenshots/view_reservation.png)
 Users can view all bookings whether logged in or not
+![View reservation](screenshots/view_reservations.png)
 
 # Update
 ![Update reservation](screenshots/update_reservation.png)
-![Update button](screenshots/update_button.png)
+![Update button](screenshots/edit_button.png)
 Users can update a booking, but only one they made themself. If they attempt to update a booking that is not in their name, they will be notified that they can't do this via a JavaScript alert.
 
 # Delete
-![Delete button](screenshots/delete_button.png)
 Users can delete a booking, but only one they made themself. If they attempt to dleete a booking that is not in their name, they will be notified that they can't do this via a JavaScript alert.
+![Delete button](screenshots/delete_button.png)
 
 # Login
+Users can log in if they have an account, which allows them create, update and delete bookings
 ![Login](screenshots/login.png)
 ![Login button](screenshots/login_button.png)
-Users can log in if they have an account, which allows them create, update and delete bookings
 
 # Logout
-![Logout button](screenshots/logout_button.png)
 Users can log out at any time
+![Logout button](screenshots/logout_button.png)
 
 # Register
+Users can register if they don't already have an account
 ![Register](screenshots/register.png)
 ![Register button](screenshots/register_button.png)
-Users can register if they don't already have an account
 
 # Future Features
 Currently, there are no table numbers, so in the future, I plan to add table numbers to the model and prevent double bookings for tables (i.e. same table, same date/time).
@@ -76,8 +76,8 @@ Validated using PEP8, no errors found
 https://pep8ci.herokuapp.com/
 
 Lighthouse:
-![Lighthouse scores](screenshots/lighthouse.png)
 Scores 100 on accessibility and performance on Lighthouse
+![Lighthouse scores](screenshots/lighthouse.png)
 
 
 ## Testing
