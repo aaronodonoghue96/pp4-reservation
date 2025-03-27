@@ -4,47 +4,47 @@
 
 ## Overview
 
-![Homepage](pp4_reservation_homepage.png)
+![Homepage](screenshots/pp4_reservation_homepage.png)
 
 This is a simple restaurant booking website made using Python, HTML and PostgreSQL for Portfolio Project 4 of the Code Institute Full Stack Development course.
 
 The deployed app is on https://pp4-reservation-797e3a069ab7.herokuapp.com/.
 
 ER diagram generated using python manage.py graph_models -a -g -o er_diagram.png from django-extensions and Graphviz
-![ER diagram](er_diagram.png)
+![ER diagram](screenshots/er_diagram.png)
 
 ## Features
 
 # Create
-![Create reservation](create_reservation.png)
-![Create button](create_button.png)
+![Create reservation](screenshots/create_reservation.png)
+![Create button](screenshots/create_button.png)
 Users can create a new booking, but only if logged in
 
 # Read
-![View reservation](view_reservation.png)
+![View reservation](screenshots/view_reservation.png)
 Users can view all bookings whether logged in or not
 
 # Update
-![Update reservation](update_reservation.png)
-![Update button](update_button.png)
+![Update reservation](screenshots/update_reservation.png)
+![Update button](screenshots/update_button.png)
 Users can update a booking, but only one they made themself. If they attempt to update a booking that is not in their name, they will be notified that they can't do this via a JavaScript alert.
 
 # Delete
-![Delete button](delete_button.png)
+![Delete button](screenshots/delete_button.png)
 Users can delete a booking, but only one they made themself. If they attempt to dleete a booking that is not in their name, they will be notified that they can't do this via a JavaScript alert.
 
 # Login
-![Login](login.png)
-![Login button](login_button.png)
+![Login](screenshots/login.png)
+![Login button](screenshots/login_button.png)
 Users can log in if they have an account, which allows them create, update and delete bookings
 
 # Logout
-![Logout button](logout_button.png)
+![Logout button](screenshots/logout_button.png)
 Users can log out at any time
 
 # Register
-![Register](register.png)
-![Register button](register_button.png)
+![Register](screenshots/register.png)
+![Register button](screenshots/register_button.png)
 Users can register if they don't already have an account
 
 # Future Features
