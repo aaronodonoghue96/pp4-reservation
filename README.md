@@ -48,146 +48,119 @@ Tested responsiveness using Google browser and manually resizing window, all ele
 ## Deployment & Local Development
 
 ### Deployment
+1. Set up Your Project Locally
+Ensure that you have the following prerequisites installed on your local machine:
 
-The project is deployed using Heroku. To deploy the project:
+Python (preferably version 3.8 or later)
 
-1. Create a database using PostgreSQL
-2. Go to the dashboard and select the database just created.
-3. Copy the URL (you can click the clipboard icon to copy)
+Django (installed via pip)
 
-#### **Heroku app setup**
+Git (for version control and deployment)
 
-  1. From the [Heroku dashboard](https://dashboard.heroku.com/), click the new button in the top right corner and select create new app.
-  2. Give your app a name (this must be unique), select the region that is closest to you and then click the create app button bottom left.
-  3. Open the settings tab and create a new config var of `DATABASE_URL` and paste the database URL you copied from elephantSQL into the value (the value should not have quotation marks around it).
+Heroku CLI (for interacting with Heroku from the command line)
 
-#### **Preparation for deployment in GitPod**
+If you haven’t already, set up your Django project and make sure everything is running smoothly locally.
 
-1. Install dj_database_url and psycopg2 (they are both needed for connecting to the external database you've just set up):
+2. Install Necessary Dependencies
+You'll need to install some packages for deploying Django on Heroku. Run the following commands:
 
-   ```bash
-   pip3 install dj_database_url==0.5.0 psycopg2
-   ```
+pip install gunicorn
+pip install psycopg2
+pip install dj-database-url
+pip install whitenoise
+gunicorn is the web server that Heroku uses to run your application.
 
-2. Update your requirements.txt file with the packages just installed:
+psycopg2 is required to connect to a PostgreSQL database (used by Heroku).
 
-    ```bash
-    pip3 freeze > requirements.txt
-    ```
+dj-database-url allows you to configure the database URL from the environment.
 
-3. In settings.py underneath import os, add `import dj_database_url`
+whitenoise handles serving static files in production.
 
-4. Find the section for DATABASES and comment out the code. Add the following code below the commented out database block, and use the URL copied from PostgreSQL for the value:
+3. Create a requirements.txt File
+You’ll need to generate a requirements.txt file which lists all your dependencies. Run this command:
 
-    (NOTE! don't delete the original section, as this is a temporary step whilst we connect the external database. Make sure you don't push this value to GitHub - this value should not be saved to GitHub, it will be added to the Heroku config vars in a later step, this is temporary to allow us to migrate our models to the external database)
+pip freeze > requirements.txt
+This file is essential for Heroku to install your dependencies.
 
-    ```python
-    DATABASES = {
-        'default': dj_database_url.parse('paste-postgresql-db-url-here')
-    }
-    ```
+4. Create a Procfile
+Create a file named Procfile in the root of your project (no file extension), and add the following line:
 
-5. In the terminal, run the show migrations command to confirm connection to the external database:
+web: gunicorn restaurant_booking_.wsgi
+This tells Heroku to use gunicorn to run your Django application.
 
-    ```bash
-    python3 manage.py runserver
-    ```
+5. Configure Static Files
+Add whitenoise to your MIDDLEWARE in settings.py:
 
-6. If you have connected the database correctly you will see a list of migrations that are unchecked. You can now run migrations to migrate the models to the new database:
+MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # other middlewares
+]
+Also, set up the static files settings:
 
-    ```bash
-    python3 manage.py migrate
-    ```
+STATIC_URL = '/static/'
 
-7. Create a superuser for the new database. Input a username, email and password when directed.
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+Run collectstatic to gather all static files:
 
-    ```bash
-    python3 manage.py createsuperuser
-    ```
+python manage.py collectstatic
 
-8. You should now be able to go to the browser tab on the left of the page in elephantsql, click the table queries button and see the user you've just created by selecting the auth_user table.
-9. We can now add an if/else statement for the databases in settings.py, so we use the development database while in development (the code we commented out) - and the external database on the live site (note the change where the db URL was is now a variable we will use in Heroku):
+6. Configure the Database
+Heroku uses PostgreSQL by default. To configure your database:
 
-    ```python
-    if 'DATABASE_URL' in os.environ:
-        DATABASES = {
-          'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
-        }
-    else:
-        DATABASES = {
-            'default': {
-                'ENGINE': 'django.db.backends.sqlite3',
-                'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
-          }
-        }
-    ```
+Install dj-database-url by running pip install dj-database-url.
 
-10. Install gunicorn which will act as our webserver and freeze this to the requirements.txt file:
+In settings.py, modify the DATABASES setting:
 
-    ```bash
-    pip3 install gunicorn
-    pip3 freeze > requirements.txt
-    ```
+import dj_database_url
 
-11. Create a `Procfile` in the root directory. This tells Heroku to create a web dyno which runs gunicorn and serves our django app. Add the following to the file (making sure not to leave any blank lines underneath):
+DATABASES = {
+    'default': dj_database_url.config(default='postgres://localhost:5432/your_database_name')
+}
+Heroku automatically sets the DATABASE_URL environment variable for your database. If you're testing locally, you can use the default URL.
 
-    ```Procfile
-    web: gunicorn seaside_sewing.wsgi:application
-    ```
+7. Set Up the Django Secret Key
+To avoid exposing your secret key, you should load it from an environment variable in production:
 
-12. Log into the Heroku CLI in the terminal and then run the following command to disable collectstatic. This command tells Heroku not to collect static files when we deploy:
+import os
 
-    ```bash
-    heroku config:set DISABLE_COLLECTSTATIC=1 --app heroku-app-name-here
-    ```
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'your_default_secret_key')
+Then, set the environment variable DJANGO_SECRET_KEY in Heroku later.
 
-13. We will also need to add the Heroku app and localhost (which will allow GitPod to still work) to ALLOWED_HOSTS = [] in settings.py:
+8. Push Your Code to GitHub
+Before deploying to Heroku, you might want to push your code to GitHub for version control. If you haven’t done that yet, run these commands:
 
-    ```python
-    ALLOWED_HOSTS = ['{heroku deployed site URL here}', 'localhost' ]
-    ```
+git init
+git add .
+git commit -m "Initial commit"
+git remote add origin your-git-repo-url
+git push -u origin master
 
-14. Save, add, commit and push the changes to GitHub. You can then also initialize the Heroku git remote in the terminal and push to Heroku with:
+9. Deploy to Heroku
 
-    ```bash
-    heroku git:remote -a {app name here}
-    git push heroku master
-    ```
+Log in to Heroku (if not already logged in):
+heroku login
 
-15. You should now be able to see the deployed site (without any static files as we haven't set these up yet).
+Create a new Heroku application:
+heroku create your-app-name
 
-16. To enable automatic deploys on Heroku, go to the deploy tab and click the connect to GitHub button in the deployment method section. Search for the projects repository and then click connect. Click enable automatic deploys at the bottom of the page.
+Add PostgreSQL to your Heroku app:
+heroku addons:create heroku-postgresql:hobby-dev
 
-### Local Development
+Push your code to Heroku:
+Edit
+git push heroku master
 
-#### **How to Fork**
+10. Migrate the Database
+After deployment, run migrations on Heroku:
+heroku run python manage.py migrate
 
-To fork the repository:
+11. Set Environment Variables
+Set the DJANGO_SECRET_KEY and other necessary environment variables (e.g., DEBUG):
+heroku config:set DJANGO_SECRET_KEY='your-unique-secret-key'
+heroku config:set DEBUG=False
+You can also set any other environment variables you need for production.
 
-1. Log in (or sign up) to GitHub.
-
-2. Go to the repository for this project, [reservation](https://github.com/aaronodonoghue96/pp4-reservation).
-
-3. Click on the fork button in the top right of the page.
-
-#### **How to Clone**
-
-To clone the repository:
-
-1. Log in (or sign up) to GitHub.
-
-2. Go to the repository for this project, [reservation](https://github.com/aaronodonoghue96/pp4-reservation).
-
-3. Click the Code button, select whether you would like to clone with HTTPS, SSH or the GitHub CLI and copy the link given.
-
-4. Open the terminal in your chosen IDE and change the current working directory to the location you would like to use for the cloned repository.
-
-5. Type the following command into the terminal `git clone` followed by the link you copied in step 3.
-
-6. Set up a virtual environment (this step is not required if you are using the Code Institute template and have opened the repository in GitPod as this will have been set up for you).
-
-7. Install the packages from the requirements.txt file by running the following command in the terminal:
-
-```bash
-pip3 install -r requirements.txt
-```
+12. Open Your App
+Once everything is deployed, you can open your app in a browser:
+heroku open
+This will open the URL of your Heroku app.
